@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  app:
+    container_name: app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - ${APP_PORT}:${APP_PORT}
+    volumes:
+      - ./:/usr/src/app
+      - node_modules:/usr/src/app/node_modules/
+    env_file:
+      - .env
+    networks:
+      - webnet
+    depends_on:
+      - pgsqldb
+
+  pgsqldb:
+    image: postgres:14.3
+    container_name: postgres
+    env_file:
+      - .env
+    networks:
+      - webnet
+    environment:
+      POSTGRES_USER: '${DB_USER}'
+      POSTGRES_PASSWORD: '${DB_PASS}'
+      POSTGRES_DB: '${DB_NAME}'
+    ports:
+      - 5432:5432
+    volumes:
+      - pgsqldata:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+    depends_on:
+      - pgsqldb
+
+networks:
+  webnet:
+    driver: bridge
+volumes:
+  node_modules:
+  pgsqldata:

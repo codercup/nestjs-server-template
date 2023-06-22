@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
+import helmet from 'helmet';
 
 import { AppModule } from './app.module';
 import { VALIDATION_PIPE_OPTIONS } from './shared/constants';
@@ -9,8 +10,8 @@ import { RequestIdMiddleware } from './shared/middlewares/request-id/request-id.
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.use(helmet());
   app.setGlobalPrefix('api/v1');
-
   app.useGlobalPipes(new ValidationPipe(VALIDATION_PIPE_OPTIONS));
   app.use(RequestIdMiddleware);
 

@@ -13,23 +13,40 @@ async function bootstrap() {
 
   app.useGlobalPipes(new ValidationPipe(VALIDATION_PIPE_OPTIONS));
   app.use(RequestIdMiddleware);
-  app.enableCors();
 
-  /** Swagger configuration*/
-  const options = new DocumentBuilder()
-    .setTitle('Nestjs API starter')
-    .setDescription('Nestjs API description')
-    .setVersion('1.0')
-    .addBearerAuth()
-    .build();
+  if (process.env.APP_ENV === 'development') {
+    app.enableCors({
+      origin: true,
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+      credentials: true,
+    });
+    /** Swagger configuration*/
+    const options = new DocumentBuilder()
+      .setTitle('Nestjs API starter')
+      .setDescription('Nestjs API description')
+      .setVersion('1.0')
+      .addBearerAuth()
+      .build();
 
-  const document = SwaggerModule.createDocument(app, options);
-  SwaggerModule.setup('swagger', app, document);
-
+    const document = SwaggerModule.createDocument(app, options);
+    SwaggerModule.setup('api-docs', app, document);
+  } else {
+    const whitelist = [process.env.FRONTEND_URL];
+    app.enableCors({
+      origin: function (origin, callback) {
+        if (!origin || whitelist.indexOf(origin) !== -1) {
+          callback(null, true);
+        } else {
+          callback(new Error('Not allowed by CORS'));
+        }
+      },
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+      credentials: true,
+    });
+  }
   const configService = app.get(ConfigService);
   const port = Number(configService.get<number>('port')) + 1;
   await app.listen(port);
-  console.log('port:', port);
   console.log(`http://localhost:${port}`);
 }
 bootstrap();

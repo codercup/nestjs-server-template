@@ -27,4 +27,5 @@ export default (): any => ({
     ),
   },
   defaultAdminUserPassword: process.env.DEFAULT_ADMIN_USER_PASSWORD,
+  frontendUrl: process.env.FRONTEND_URL,
 });

@@ -9,6 +9,7 @@ specifiers:
   '@nestjs/mapped-types': '*'
   '@nestjs/platform-express': ^9.0.0
   '@nestjs/schematics': ^9.0.0
+  '@nestjs/serve-static': ^4.0.0
   '@nestjs/swagger': ^7.0.2
   '@nestjs/testing': ^9.0.0
   '@nestjs/typeorm': ^10.0.0
@@ -49,6 +50,7 @@ dependencies:
   '@nestjs/core': 9.4.3_c4fgdp752ib7dsgrlnt7fswfce
   '@nestjs/mapped-types': 2.0.0_i7luks5ses66diusqohyeqc2yi
   '@nestjs/platform-express': 9.4.3_vw2vky2jc6gkm6gj7lzrgmojyi
+  '@nestjs/serve-static': 4.0.0_vw2vky2jc6gkm6gj7lzrgmojyi
   '@nestjs/swagger': 7.0.2_ff6xh7k6m3kcxhzayktinvhdx4
   '@nestjs/typeorm': 10.0.0_nktyjm3hkn2boz7s6l2p266t2u
   class-transformer: 0.5.1
@@ -1062,6 +1064,27 @@ packages:
     transitivePeerDependencies:
       - chokidar
     dev: true
+
+  /@nestjs/serve-static/4.0.0_vw2vky2jc6gkm6gj7lzrgmojyi:
+    resolution: {integrity: sha512-8cTrNV2ngdHIjiLNsXePnw0+KY1ThrZGz/WeyAG5gIvmZNDbnZBOrPoYlKL+MOzlXlQStxR5jKLYmn+nJeoncQ==}
+    peerDependencies:
+      '@fastify/static': ^6.5.0
+      '@nestjs/common': ^9.0.0 || ^10.0.0
+      '@nestjs/core': ^9.0.0 || ^10.0.0
+      express: ^4.18.1
+      fastify: ^4.7.0
+    peerDependenciesMeta:
+      '@fastify/static':
+        optional: true
+      express:
+        optional: true
+      fastify:
+        optional: true
+    dependencies:
+      '@nestjs/common': 9.4.3_j3td4gnlgk75ora6o6suo62byy
+      '@nestjs/core': 9.4.3_c4fgdp752ib7dsgrlnt7fswfce
+      path-to-regexp: 0.2.5
+    dev: false
 
   /@nestjs/swagger/7.0.2_ff6xh7k6m3kcxhzayktinvhdx4:
     resolution: {integrity: sha512-aNwDUT/1Dpbm5Ze+YGdPOJx2+c0YQoYPc9nr+3GLr9AFiC0M8AMAJBZXEIxeS44tyvNx/EVLPVg139P4sxO3yA==}
@@ -4242,6 +4265,10 @@ packages:
 
   /path-to-regexp/0.1.7:
     resolution: {integrity: sha512-5DFkuoqlv1uYQKxy8omFBeJPQcdoE07Kv2sferDCrAq1ohOU+MSDswDIbnx3YAM60qIOnYa53wBhXW0EbMonrQ==}
+
+  /path-to-regexp/0.2.5:
+    resolution: {integrity: sha512-l6qtdDPIkmAmzEO6egquYDfqQGPMRNGjYtrU13HAXb3YSRrt7HSb1sJY0pKp6o2bAa86tSB6iwaW2JbthPKr7Q==}
+    dev: false
 
   /path-to-regexp/3.2.0:
     resolution: {integrity: sha512-jczvQbCUS7XmS7o+y1aEO9OBVFeZBQ1MDSEqmO7xSoPgOPoowY/SxLpZ6Vh97/8qHZOteiCKb7gkG9gA2ZUxJA==}

@@ -31,6 +31,7 @@
 ```bash
 # 安装node_modules依赖
 $ pnpm install
+# 先启动本机的Docker服务，再执行下面的
 # 安装数据库等docker image
 $ docker-compose up -d
 ```
